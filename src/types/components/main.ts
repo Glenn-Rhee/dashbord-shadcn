@@ -11,3 +11,15 @@ export interface NavProps {
   }[];
   className?: string;
 }
+
+export interface PageTitleProps {
+  title: string;
+  className?: string;
+}
+
+export interface CardProps {
+  label: string;
+  icon: LucideIcon;
+  amount: string;
+  description: string;
+}

@@ -7,6 +7,7 @@ import {
   ChevronRight,
   LayoutDashboard,
   Settings,
+  ShoppingCart,
   UsersRound,
 } from "lucide-react";
 import { Button } from "./ui/button";
@@ -46,7 +47,7 @@ export default function SidebarNav() {
           },
           {
             title: "Orders",
-            icon: UsersRound,
+            icon: ShoppingCart,
             variant: "ghost",
             href: "/order",
           },
