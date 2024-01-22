@@ -1,5 +1,7 @@
+import BarChart from "@/components/BarChart";
 import Card from "@/components/Card";
 import PageTitle from "@/components/PageTitle";
+import CardContent from "@/components/content/CardContent";
 import { cardData } from "@/lib/data";
 
 export default function Home() {
@@ -16,6 +18,12 @@ export default function Home() {
             key={i}
           />
         ))}
+      </section>
+      <section className="grid grid-cols-1 gap-4 transition-all lg:grid-cols-2">
+        <CardContent>
+          <p className="p-4 font-semibold">Overview</p>
+          <BarChart />
+        </CardContent>
       </section>
     </div>
   );

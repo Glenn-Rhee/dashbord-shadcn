@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
 import { CardProps } from "@/types/components/main";
 import React from "react";
+import CardContent from "./content/CardContent";
 
 export default function Card(props: CardProps) {
   const { label, amount, description } = props;
@@ -18,17 +18,5 @@ export default function Card(props: CardProps) {
         <p className="text-xs text-gray-500">{description}</p>
       </section>
     </CardContent>
-  );
-}
-
-export function CardContent(props: React.HtmlHTMLAttributes<HTMLDivElement>) {
-  return (
-    <div
-      {...props}
-      className={cn(
-        "flex w-full gap-3 flex-col rounded-xl border p-5 shadow",
-        props.className
-      )}
-    />
   );
 }
