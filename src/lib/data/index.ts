@@ -1,5 +1,5 @@
-import { CardProps } from "@/types/components/main";
-import { Activity, CreditCard, DollarSign, Users } from "lucide-react";
+import { CardProps, SalesCardProps } from "@/types/components/main";
+import { Activity, CreditCard, DollarSign, LayoutDashboard, Settings, ShoppingCart, Users, UsersRound } from "lucide-react";
 
 export const cardData: CardProps[] = [
   {
@@ -41,4 +41,22 @@ export const chartData = [
   { name: "Oct", total: Math.floor(Math.random() * 5000) + 1000 },
   { name: "Nov", total: Math.floor(Math.random() * 5000) + 1000 },
   { name: "Dec", total: Math.floor(Math.random() * 5000) + 1000 },
+];
+
+export const userSalesData: SalesCardProps[] = [
+  {
+    name: "Ariel Rizki",
+    email: "arielrizki2005@gmail.com",
+    saleAmount: 50000,
+  },
+  {
+    name: "Glenn Rhee",
+    email: "glennrhee@gmail.com",
+    saleAmount: 60000,
+  },
+  {
+    name: "Maggie Rhee",
+    email: "maggierhee@gmail.com",
+    saleAmount: 70000,
+  },
 ];

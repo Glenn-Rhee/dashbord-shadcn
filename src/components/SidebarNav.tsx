@@ -78,7 +78,7 @@ export default function SidebarNav() {
           },
           {
             title: "Orders",
-            icon: UsersRound,
+            icon: ShoppingCart,
             variant: "ghost",
             href: "/order",
           },

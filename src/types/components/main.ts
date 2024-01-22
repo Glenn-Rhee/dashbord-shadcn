@@ -23,3 +23,9 @@ export interface CardProps {
   amount: string;
   description: string;
 }
+
+export interface SalesCardProps {
+  name: string;
+  email: string;
+  saleAmount: number;
+}

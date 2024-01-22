@@ -2,7 +2,8 @@ import BarChart from "@/components/BarChart";
 import Card from "@/components/Card";
 import PageTitle from "@/components/PageTitle";
 import CardContent from "@/components/content/CardContent";
-import { cardData } from "@/lib/data";
+import { cardData, userSalesData } from "@/lib/data";
+import SalesCard from "./SalesCard";
 
 export default function Home() {
   return (
@@ -23,6 +24,18 @@ export default function Home() {
         <CardContent>
           <p className="p-4 font-semibold">Overview</p>
           <BarChart />
+        </CardContent>
+        <CardContent>
+          <p>Recent Sales</p>
+          <p className="text-sm text-gray-400">You made 265 sales this month</p>
+          {userSalesData.map((user, i) => (
+            <SalesCard
+              name={user.name}
+              email={user.email}
+              saleAmount={user.saleAmount}
+              key={i}
+            />
+          ))}
         </CardContent>
       </section>
     </div>
