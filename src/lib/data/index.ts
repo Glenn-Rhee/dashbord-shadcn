@@ -1,5 +1,5 @@
-import { CardProps, Payment, SalesCardProps } from "@/types/components/main";
-import { ColumnDef } from "@tanstack/react-table";
+import { CardProps, SalesCardProps } from "@/types/components/main";
+import { Orders, Payment } from "@/types/data/main";
 import { Activity, CreditCard, DollarSign, Users } from "lucide-react";
 
 export const cardData: CardProps[] = [
@@ -86,5 +86,36 @@ export const data: Payment[] = [
     email: "glennrhee@gmail.com",
     username: "Glenn Rhee",
     action: "",
+  },
+];
+
+export const dataOrders: Orders[] = [
+  {
+    id: "8358asyu",
+    order: "ORD01",
+    status: "Pending",
+    lastOrder: "2023-01-23",
+    method: "Paypall",
+  },
+  {
+    id: "438acas",
+    order: "ORD02",
+    status: "Processing",
+    lastOrder: "2023-01-23",
+    method: "Debit",
+  },
+  {
+    id: "4614coma",
+    order: "ORD03",
+    status: "Pending",
+    lastOrder: "2023-01-23",
+    method: "Paypall",
+  },
+  {
+    id: "197sadq",
+    order: "ORD04",
+    status: "Completed",
+    lastOrder: "2023-01-23",
+    method: "Cash",
   },
 ];

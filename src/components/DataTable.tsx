@@ -62,10 +62,6 @@ export function DataTable<TData, TValue>({
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
-                      <div className="flex gap-3">
-                        {cell.column.id === "action" && <Button variant={"default"}>Edit</Button>}
-                        {cell.column.id === "action" && <Button variant={"destructive"}>Delete</Button>}
-                      </div>
                     </TableCell>
                   ))}
                 </TableRow>
