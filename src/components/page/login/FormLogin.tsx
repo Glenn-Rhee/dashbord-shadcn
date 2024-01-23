@@ -14,49 +14,26 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import PropagateLoader from "react-spinners/PropagateLoader";
-import { formSchema, override } from "@/lib/schemaForm";
+import { loginSchema, override } from "@/lib/schemaForm";
 import Link from "next/link";
 
-export default function FormSignUp() {
+export default function FormLogin() {
   const [loading, setLoading] = useState(false);
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof loginSchema>) {
     console.log(values);
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <>
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Username"
-                    type="text"
-                    {...field}
-                    autoComplete="off"
-                    autoFocus
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </>
-          )}
-        />
         <FormField
           control={form.control}
           name="email"
@@ -69,6 +46,7 @@ export default function FormSignUp() {
                   type="email"
                   {...field}
                   autoComplete="off"
+                  autoFocus
                 />
               </FormControl>
               <FormMessage />
@@ -93,32 +71,18 @@ export default function FormSignUp() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirmation Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="******"
-                  type="password"
-                  {...field}
-                  autoComplete="off"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <Link
-          href={"/auth/login"}
+          href={"/auth/signup"}
           className="mt-4 block text-center text-slate-600 hover:underline"
         >
-          Already have an account?
+          Haven&apos;t an account?
         </Link>
-        <Button type="submit" className="w-full" disabled={loading}>
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={loading}
+        >
           {loading ? (
             <PropagateLoader
               cssOverride={override}
@@ -127,7 +91,7 @@ export default function FormSignUp() {
               data-testid="loader"
             />
           ) : (
-            "Sign Up"
+            "Login"
           )}
         </Button>
       </form>

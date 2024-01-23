@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { LucideIcon } from "lucide-react";
-import React from "react";
+import React, { ReactNode } from "react";
 import { Orders, Payment, Settings } from "../data/main";
 
 export interface NavProps {
@@ -48,4 +48,8 @@ export interface TableOrderProps {
 
 export interface TableSettingsProps {
   data: Settings[];
+}
+
+export interface ContainerAuthProps {
+  children: ReactNode;
 }
