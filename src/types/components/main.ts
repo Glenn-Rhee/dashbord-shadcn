@@ -1,6 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { LucideIcon } from "lucide-react";
 import React from "react";
+import { Payment } from "../data/main";
 
 export interface NavProps {
   isCollapsed: boolean;
@@ -35,4 +36,8 @@ export interface SalesCardProps {
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+}
+
+export interface TableUserProps {
+  data: Payment[];
 }

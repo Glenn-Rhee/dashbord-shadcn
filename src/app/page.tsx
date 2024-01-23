@@ -1,9 +1,9 @@
-import BarChart from "@/components/BarChart";
-import Card from "@/components/Card";
+import BarChart from "@/components/page/home/BarChart";
+import Card from "@/components/page/home/Card";
 import PageTitle from "@/components/PageTitle";
 import CardContent from "@/components/content/CardContent";
 import { cardData, userSalesData } from "@/lib/data";
-import SalesCard from "../components/SalesCard";
+import SalesCard from "../components/page/home/SalesCard";
 
 export default function Home() {
   return (

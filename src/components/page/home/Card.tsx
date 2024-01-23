@@ -1,6 +1,6 @@
 import { CardProps } from "@/types/components/main";
 import React from "react";
-import CardContent from "./content/CardContent";
+import CardContent from "../../content/CardContent";
 
 export default function Card(props: CardProps) {
   const { label, amount, description } = props;
