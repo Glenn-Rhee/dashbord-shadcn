@@ -14,3 +14,8 @@ export type Orders = {
   lastOrder: string;
   method: string;
 };
+
+export type Settings = {
+  category: string;
+  value: any;
+};

@@ -5,10 +5,20 @@ import { TableUserProps } from "@/types/components/main";
 import { Payment } from "@/types/data/main";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
+import Swal from "sweetalert2";
 
 export default function TableUsers(props: TableUserProps) {
   const { data } = props;
   return <DataTable columns={columns} data={data} />;
+}
+
+function handleUnfunction() {
+  Swal.fire({
+    title: "Error",
+    text: "Oops, This button is not yet working",
+    icon: "error",
+    confirmButtonText: "OK",
+  });
 }
 
 const columns: ColumnDef<Payment>[] = [
@@ -48,8 +58,12 @@ const columns: ColumnDef<Payment>[] = [
     cell: () => {
       return (
         <div className="flex gap-3">
-          <Button variant={"default"}>Edit</Button>
-          <Button variant={"destructive"}>Delete</Button>
+          <Button variant={"default"} onClick={handleUnfunction} size={"sm"}>
+            Edit
+          </Button>
+          <Button variant={"destructive"} onClick={handleUnfunction}>
+            Delete
+          </Button>
         </div>
       );
     },

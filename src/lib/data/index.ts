@@ -1,5 +1,5 @@
 import { CardProps, SalesCardProps } from "@/types/components/main";
-import { Orders, Payment } from "@/types/data/main";
+import { Orders, Payment, Settings } from "@/types/data/main";
 import { Activity, CreditCard, DollarSign, Users } from "lucide-react";
 
 export const cardData: CardProps[] = [
@@ -117,5 +117,24 @@ export const dataOrders: Orders[] = [
     status: "Completed",
     lastOrder: "2023-01-23",
     method: "Cash",
+  },
+];
+
+export const settingsData: Settings[] = [
+  {
+    category: "Account",
+    value: "Admin",
+  },
+  {
+    category: "Notifications",
+    value: "false",
+  },
+  {
+    category: "Language",
+    value: "English",
+  },
+  {
+    category: "Theme",
+    value: "Dark",
   },
 ];
