@@ -1,4 +1,6 @@
+import { ColumnDef } from "@tanstack/react-table";
 import { LucideIcon } from "lucide-react";
+import React from "react";
 
 export interface NavProps {
   isCollapsed: boolean;
@@ -29,3 +31,18 @@ export interface SalesCardProps {
   email: string;
   saleAmount: number;
 }
+
+export interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+}
+
+export type Payment = {
+  id: string;
+  amount: number;
+  status: "online" | "offline";
+  email: string;
+  username: string;
+  action: string;
+};
+

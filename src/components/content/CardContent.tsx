@@ -5,7 +5,7 @@ export default function CardContent(props: React.HtmlHTMLAttributes<HTMLDivEleme
       <div
         {...props}
         className={cn(
-          "flex w-full gap-3 flex-col rounded-xl border p-5 shadow",
+          "flex w-full gap-3 flex-col rounded-xl border p-5 shadow-md",
           props.className
         )}
       />

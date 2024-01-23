@@ -1,8 +1,53 @@
+"use client";
+import { DataTable } from "@/components/DataTable";
+import PageTitle from "@/components/PageTitle";
+import { data } from "@/lib/data";
+import { Payment } from "@/types/components/main";
+import { ColumnDef } from "@tanstack/react-table";
+import Image from "next/image";
+
 export default function UsersPage() {
-    return (
-      <div>
-        <h1>Users page</h1>
-      </div>
-    );
-  }
-  
+  return (
+    <div className="flex flex-col w-full gap-5">
+      <PageTitle title="Users" />
+      <DataTable columns={columns} data={data} />
+    </div>
+  );
+}
+
+export const columns: ColumnDef<Payment>[] = [
+  {
+    accessorKey: "status",
+    header: "Status",
+  },
+  {
+    accessorKey: "username",
+    header: "Username",
+    cell: ({ row }) => {
+      return (
+        <div className="flex gap-2 items-center">
+          <Image
+            width={20}
+            height={20}
+            alt="Avatar"
+            src="/img/prof.jpg"
+            className="rounded-full"
+          />
+          <p>{row.getValue("username")}</p>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
+  },
+  {
+    accessorKey: "amount",
+    header: "Amount",
+  },
+  {
+    accessorKey: "action",
+    header: "Action",
+  },
+];

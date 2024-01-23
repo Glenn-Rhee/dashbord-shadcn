@@ -3,7 +3,7 @@ import Card from "@/components/Card";
 import PageTitle from "@/components/PageTitle";
 import CardContent from "@/components/content/CardContent";
 import { cardData, userSalesData } from "@/lib/data";
-import SalesCard from "./SalesCard";
+import SalesCard from "../components/SalesCard";
 
 export default function Home() {
   return (

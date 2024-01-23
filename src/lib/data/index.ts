@@ -1,5 +1,6 @@
-import { CardProps, SalesCardProps } from "@/types/components/main";
-import { Activity, CreditCard, DollarSign, LayoutDashboard, Settings, ShoppingCart, Users, UsersRound } from "lucide-react";
+import { CardProps, Payment, SalesCardProps } from "@/types/components/main";
+import { ColumnDef } from "@tanstack/react-table";
+import { Activity, CreditCard, DollarSign, Users } from "lucide-react";
 
 export const cardData: CardProps[] = [
   {
@@ -58,5 +59,32 @@ export const userSalesData: SalesCardProps[] = [
     name: "Maggie Rhee",
     email: "maggierhee@gmail.com",
     saleAmount: 70000,
+  },
+];
+
+export const data: Payment[] = [
+  {
+    id: "728ed52f",
+    amount: 100,
+    status: "online",
+    email: "arielrizki2005@gmail.com",
+    username: "Ariel Rizki Muhtamad Bakri",
+    action: "",
+  },
+  {
+    id: "489e1d42",
+    amount: 125,
+    status: "offline",
+    email: "glennrhee@gmail.com",
+    username: "Glenn Rhee",
+    action: "",
+  },
+  {
+    id: "489e1d42",
+    amount: 125,
+    status: "offline",
+    email: "glennrhee@gmail.com",
+    username: "Glenn Rhee",
+    action: "",
   },
 ];
