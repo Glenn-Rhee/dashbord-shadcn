@@ -13,8 +13,8 @@ model user {
     username String
     email    String
     password String
-    amount   Int     @default(0)
-    capital  Int     @default(0)
+    amount   Int     
+    capital  Int     
     order    order[]
 }
 

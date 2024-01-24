@@ -16,6 +16,7 @@ import * as z from "zod";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { formSchema, override } from "@/lib/schemaForm";
 import Link from "next/link";
+import { signupPost } from "@/lib/fetch/user";
 
 export default function FormSignUp() {
   const [loading, setLoading] = useState(false);
@@ -29,8 +30,16 @@ export default function FormSignUp() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
+    const data = {
+      username: values.username,
+      email: values.email,
+      password: values.password,
+    };
+    const response = await signupPost(data);
+    setLoading(false);
+    console.log(response);
   }
 
   return (
