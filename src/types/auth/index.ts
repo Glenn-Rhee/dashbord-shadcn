@@ -4,6 +4,11 @@ export interface SignUpTypes {
   password: string;
 }
 
+export interface LoginTypes {
+  email: string;
+  password: string;
+}
+
 export interface dataUser {
   id: string;
   username: string;

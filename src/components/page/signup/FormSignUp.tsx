@@ -67,7 +67,7 @@ export default function FormSignUp() {
       const cookies = new Cookies();
       cookies.set("qwpt", response.data.token, { path: "/" });
       router.push("/");
-      toast.success("Success Login", {
+      toast.success("Success Signup", {
         description: "Welcome to our App",
       });
     } catch (error) {

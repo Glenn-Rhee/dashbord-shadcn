@@ -16,9 +16,20 @@ import * as z from "zod";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { loginSchema, override } from "@/lib/schemaForm";
 import Link from "next/link";
+import { loginPost } from "@/lib/fetch/user";
+import { Toaster, toast } from "sonner";
+import { useRouter } from "next/navigation";
+import AlertForm from "@/components/AlertForm";
+import { ResponseApiUser } from "@/types/auth";
+import Cookies from "universal-cookie";
 
 export default function FormLogin() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<{
+    msg: string;
+    code: number | string;
+  } | null>(null);
+  const router = useRouter();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -27,12 +38,33 @@ export default function FormLogin() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof loginSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+    setLoading(true);
+    try {
+      const response: ResponseApiUser = await loginPost(values);
+      if (response.status === "failed") {
+        setError({ code: response.statusCode, msg: response.message });
+        return;
+      }
+
+      setError(null);
+      const cookies = new Cookies();
+      cookies.set("qwpt", response.data.token, { path: "/" });
+      router.push("/");
+      toast.success("Success Login", {
+        description: `Welcome back ${response.data.username}`,
+      });
+    } catch (error) {
+      setError({ code: 500, msg: "Internal Server Error" });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <Form {...form}>
+      <Toaster position="top-right" theme="dark" />
+      {error ? <AlertForm errorCode={error.code} message={error.msg} /> : null}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
@@ -78,11 +110,7 @@ export default function FormLogin() {
         >
           Haven&apos;t an account?
         </Link>
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={loading}
-        >
+        <Button type="submit" className="w-full" disabled={loading}>
           {loading ? (
             <PropagateLoader
               cssOverride={override}

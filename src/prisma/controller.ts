@@ -1,5 +1,6 @@
-import { dataUser } from "@/types/auth";
+import { LoginTypes, dataUser } from "@/types/auth";
 import prisma from "./client";
+import { comparePassword } from "@/lib/bcrypt/password";
 
 export async function setNewUser(data: dataUser) {
   try {
@@ -32,6 +33,46 @@ export async function setNewUser(data: dataUser) {
     };
   } finally {
     await prisma.$disconnect();
+  }
+}
+
+export async function loginUser(data: LoginTypes) {
+  try {
+    const registered: dataUser | null | undefined = await findByEmail(
+      data.email
+    );
+    if (!registered) {
+      return {
+        message: "Email not registered",
+        data: {},
+        statusCode: 404,
+      };
+    }
+
+    const isCompared = await comparePassword(
+      data.password,
+      registered.password
+    );
+
+    if (!isCompared) {
+      return {
+        message: "Password not match",
+        data: {},
+        statusCode: 401,
+      };
+    }
+
+    return {
+      message: "success",
+      data: registered,
+      statusCode: 200,
+    };
+  } catch (error) {
+    return {
+      message: "Internal Server Error",
+      data: {},
+      statusCode: 500,
+    };
   }
 }
 

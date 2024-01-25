@@ -1,4 +1,4 @@
-import { SignUpTypes } from "@/types/auth";
+import { LoginTypes, SignUpTypes } from "@/types/auth";
 
 export async function signupPost(data: SignUpTypes) {
   try {
@@ -11,6 +11,22 @@ export async function signupPost(data: SignUpTypes) {
     });
     const dataResponse = await response.json();
     return dataResponse;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function loginPost(data: LoginTypes) {
+  try {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    return await response.json();
   } catch (error) {
     console.log(error);
   }
