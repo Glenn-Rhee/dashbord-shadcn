@@ -27,7 +27,7 @@ export default function Home() {
         </CardContent>
         <CardContent>
           <p>Recent Sales</p>
-          <p className="text-sm text-gray-400">You made 265 sales this month</p>
+          <p className="text-sm text-gray-400">You made 250 sales this month</p>
           {userSalesData.map((user, i) => (
             <SalesCard
               name={user.name}
