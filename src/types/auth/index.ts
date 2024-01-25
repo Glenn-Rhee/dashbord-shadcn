@@ -5,9 +5,23 @@ export interface SignUpTypes {
 }
 
 export interface dataUser {
-    username: string,
-    email: string,
-    password: string;
-    amount: number,
-    capital: number
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  amount: number;
+  capital: number;
+}
+
+export interface payloadToken {
+  id: string;
+  username: string;
+  email: string;
+}
+
+export interface ResponseApiUser {
+  status: "failed" | "success";
+  statusCode: number;
+  message: string;
+  data?: any;
 }

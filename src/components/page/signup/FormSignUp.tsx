@@ -17,9 +17,20 @@ import PropagateLoader from "react-spinners/PropagateLoader";
 import { formSchema, override } from "@/lib/schemaForm";
 import Link from "next/link";
 import { signupPost } from "@/lib/fetch/user";
+import AlertForm from "@/components/AlertForm";
+import { ResponseApiUser } from "@/types/auth";
+import { toast, Toaster } from "sonner";
+import { useRouter } from "next/navigation";
+import Cookies from "universal-cookie";
 
 export default function FormSignUp() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<{
+    msg: string;
+    code: number | string;
+  } | null>(null);
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,18 +43,43 @@ export default function FormSignUp() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
-    const data = {
-      username: values.username,
-      email: values.email,
-      password: values.password,
-    };
-    const response = await signupPost(data);
-    setLoading(false);
-    console.log(response);
+    try {
+      if (values.password !== values.confirmPassword) {
+        setError({ code: 406, msg: "Password doesn't match" });
+        setLoading(false);
+        return;
+      }
+
+      const data = {
+        username: values.username,
+        email: values.email,
+        password: values.password,
+      };
+      const response: ResponseApiUser = await signupPost(data);
+      if (response.status === "failed") {
+        setError({ code: response.statusCode, msg: response.message });
+        setLoading(false);
+        return;
+      }
+
+      setError(null);
+      setLoading(false);
+      const cookies = new Cookies();
+      cookies.set("qwpt", response.data.token, { path: "/" });
+      router.push("/");
+      toast.success("Success Login", {
+        description: "Welcome to our App",
+      });
+    } catch (error) {
+      setError({ code: 500, msg: "Internal Server Error" });
+      setLoading(false);
+    }
   }
 
   return (
     <Form {...form}>
+      <Toaster position="top-right" theme="dark" />
+      {error ? <AlertForm errorCode={error.code} message={error.msg} /> : null}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}

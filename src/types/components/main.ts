@@ -53,3 +53,8 @@ export interface TableSettingsProps {
 export interface ContainerAuthProps {
   children: ReactNode;
 }
+
+export interface AlertFormProps {
+  errorCode: number | string;
+  message: string;
+}

@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen w-full bg-white text-black flex",
+          "min-h-screen w-full bg-[#f2f2f2] text-black flex",
           inter.className,
           {
             "debug-screens": process.env.NODE_ENV === "development",

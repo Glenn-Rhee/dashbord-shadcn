@@ -1,4 +1,5 @@
 import { hashedPassword } from "@/lib/bcrypt/password";
+import { setAccessToken } from "@/lib/token";
 import {
   checkEmail,
   checkUsername,
@@ -6,8 +7,10 @@ import {
   responseFailed,
   responseSuccess,
 } from "@/lib/validator";
+import { setNewUser } from "@/prisma/controller";
 import { SignUpTypes, dataUser } from "@/types/auth";
 import { NextRequest, NextResponse } from "next/server";
+import { v4 } from "uuid";
 
 export async function POST(req: NextRequest) {
   const body: SignUpTypes = await req.json();
@@ -28,6 +31,7 @@ export async function POST(req: NextRequest) {
 
   const hashed = await hashedPassword(body.password);
   const data: dataUser = {
+    id: v4(),
     username: body.username,
     email: body.email,
     password: hashed,
@@ -35,5 +39,21 @@ export async function POST(req: NextRequest) {
     capital: 0,
   };
 
-  return NextResponse.json(responseSuccess("Success signup new user", data));
+  const response = await setNewUser(data);
+  if (response.statusCode !== 200) {
+    return NextResponse.json(
+      responseFailed(response.statusCode, response.message)
+    );
+  }
+
+  const dataUser = {
+    ...response.data,
+    token: setAccessToken({
+      email: data.email,
+      username: data.username,
+      id: data.id,
+    }),
+  };
+
+  return NextResponse.json(responseSuccess(response.message, dataUser));
 }
