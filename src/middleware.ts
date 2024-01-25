@@ -4,9 +4,9 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get("qwpt");
   if (!token) {
     return NextResponse.redirect(new URL("/auth/signup", req.url));
-  } else {
-    return NextResponse.next();
   }
+
+  return NextResponse.next();
 }
 
 export const config = {

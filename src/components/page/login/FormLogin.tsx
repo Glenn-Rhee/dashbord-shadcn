@@ -40,10 +40,17 @@ export default function FormLogin() {
 
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     setLoading(true);
+    const isRegistered = cookies.get("qwpt");
+    if (isRegistered) {
+      router.push("/");
+      setLoading(false)
+      return;
+    }
     try {
       const response: ResponseApiUser = await loginPost(values);
       if (response.status === "failed") {
         setError({ code: response.statusCode, msg: response.message });
+        setLoading(false);
         return;
       }
 
@@ -56,6 +63,7 @@ export default function FormLogin() {
       setLoading(true);
     } catch (error) {
       setError({ code: 500, msg: "Internal Server Error" });
+      setLoading(false);
     }
   }
 
