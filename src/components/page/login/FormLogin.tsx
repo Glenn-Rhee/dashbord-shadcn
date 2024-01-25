@@ -21,7 +21,7 @@ import { Toaster, toast } from "sonner";
 import { useRouter } from "next/navigation";
 import AlertForm from "@/components/AlertForm";
 import { ResponseApiUser } from "@/types/auth";
-import Cookies from "universal-cookie";
+import { cookies } from "@/lib/Cookies";
 
 export default function FormLogin() {
   const [loading, setLoading] = useState(false);
@@ -47,17 +47,15 @@ export default function FormLogin() {
         return;
       }
 
-      setError(null);
       router.push("/");
-      const cookies = new Cookies();
-      cookies.set("qwpt", response.data.token, { path: "/" , sameSite: "none"});
+      setError(null);
+      cookies.set("qwpt", response.data.token, { path: "/", sameSite: "none" });
       toast.success("Success Login", {
         description: `Welcome back ${response.data.username}`,
       });
+      setLoading(true);
     } catch (error) {
       setError({ code: 500, msg: "Internal Server Error" });
-    } finally {
-      setLoading(false);
     }
   }
 

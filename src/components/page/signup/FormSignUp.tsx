@@ -21,7 +21,7 @@ import AlertForm from "@/components/AlertForm";
 import { ResponseApiUser } from "@/types/auth";
 import { toast, Toaster } from "sonner";
 import { useRouter } from "next/navigation";
-import Cookies from "universal-cookie";
+import { cookies } from "@/lib/Cookies";
 
 export default function FormSignUp() {
   const [loading, setLoading] = useState(false);
@@ -64,7 +64,6 @@ export default function FormSignUp() {
 
       setError(null);
       setLoading(false);
-      const cookies = new Cookies();
       cookies.set("qwpt", response.data.token, { path: "/" });
       router.push("/");
       toast.success("Success Signup", {
