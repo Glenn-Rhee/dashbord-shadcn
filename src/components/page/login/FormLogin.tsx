@@ -48,9 +48,9 @@ export default function FormLogin() {
       }
 
       setError(null);
-      const cookies = new Cookies();
-      cookies.set("qwpt", response.data.token, { path: "/" });
       router.push("/");
+      const cookies = new Cookies();
+      cookies.set("qwpt", response.data.token, { path: "/" , sameSite: "none"});
       toast.success("Success Login", {
         description: `Welcome back ${response.data.username}`,
       });
