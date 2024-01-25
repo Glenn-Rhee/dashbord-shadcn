@@ -54,9 +54,9 @@ export default function FormLogin() {
         return;
       }
 
-      router.push("/");
       setError(null);
       cookies.set("qwpt", response.data.token, { path: "/", sameSite: "none" });
+      router.push("/");
       toast.success("Success Login", {
         description: `Welcome back ${response.data.username}`,
       });
