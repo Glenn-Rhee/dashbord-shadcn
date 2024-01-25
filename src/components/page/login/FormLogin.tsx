@@ -43,7 +43,7 @@ export default function FormLogin() {
     const isRegistered = cookies.get("qwpt");
     if (isRegistered) {
       router.push("/");
-      setLoading(false)
+      setLoading(false);
       return;
     }
     try {
@@ -55,12 +55,14 @@ export default function FormLogin() {
       }
 
       setError(null);
-      cookies.set("qwpt", response.data.token, { path: "/", sameSite: "none" });
-      router.push("/");
-      toast.success("Success Login", {
-        description: `Welcome back ${response.data.username}`,
-      });
-      setLoading(true);
+      cookies.set("qwpt", response.data.token, { path: "/" });
+      setTimeout(() => {
+        router.push("/");
+        toast.success("Success Login", {
+          description: `Welcome back ${response.data.username}`,
+        });
+        setLoading(true);
+      }, 100);
     } catch (error) {
       setError({ code: 500, msg: "Internal Server Error" });
       setLoading(false);
