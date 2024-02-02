@@ -34,7 +34,8 @@ export async function loginPost(data: LoginTypes) {
 
 export async function getUser() {
   try {
-    const response = await fetch("http://localhost:3000/api/user", {
+    const url = process.env.NEXT_PUBLIC_BASEURL_FETCH || "";
+    const response = await fetch(url + "/api/user", {
       method: "GET",
     });
     return await response.json();
