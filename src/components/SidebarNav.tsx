@@ -12,11 +12,11 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { usePathname } from "next/navigation";
+import Profile from "./Profile";
 
 export default function SidebarNav() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathName = usePathname();
-
   function handleCollapsed() {
     setIsCollapsed(!isCollapsed);
   }
@@ -25,6 +25,9 @@ export default function SidebarNav() {
     <>
       {!pathName.includes("auth") ? (
         <div className="relative min-w-[80px] border-r px-3 pb-10 pt-24">
+          <div className="flex justify-center">
+            <Profile />
+          </div>
           <div className="absolute right-[-20px] top-7 hidden md:block">
             <Button
               variant={"ghost"}
