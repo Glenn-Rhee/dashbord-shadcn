@@ -36,15 +36,14 @@ export async function getUser() {
   try {
     const url =
       process.env.NODE_ENV === "development"
-        ? process.env.NEXT_PUBLIC_BASEURL_FETCH || ""
-        : "https://dashbord-shadcn.vercel.app";
+        ? process.env.NEXT_PUBLIC_BASEURL_FETCH
+        : "";
     const response = await fetch(url + "/api/user", {
       method: "GET",
     });
+
     return await response.json();
   } catch (error: any) {
     console.log(error.message, "p");
   }
 }
-
-getUser().then((res) => console.log(res));
