@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 
 export default function TableUsers(props: TableUserProps) {
   const { data } = props;
-  console.log(data);
 
   return <DataTable columns={columns} data={data} />;
 }
