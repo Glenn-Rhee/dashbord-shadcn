@@ -31,3 +31,16 @@ export async function loginPost(data: LoginTypes) {
     console.log(error);
   }
 }
+
+export async function getUser() {
+  try {
+    const response = await fetch("http://localhost:3000/api/user", {
+      method: "GET",
+    });
+    return await response.json();
+  } catch (error: any) {
+    console.log(error.message, "p");
+  }
+}
+
+getUser().then((res) => console.log(res));
