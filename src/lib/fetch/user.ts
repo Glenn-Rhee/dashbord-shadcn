@@ -37,7 +37,7 @@ export async function getUser() {
     const url =
       process.env.NODE_ENV === "development"
         ? process.env.NEXT_PUBLIC_BASEURL_FETCH
-        : "";
+        : "https://dashbord-shadcn.vercel.app";
     const response = await fetch(url + "/api/user", {
       method: "GET",
     });
